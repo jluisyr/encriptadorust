@@ -1,6 +1,7 @@
 var express = require('express'),
 app = express(),
-port = process.env.port || 3000,
+server_port = process.env.OPENSHIFT_NODEJS_PORT || 3000,
+server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
 mongoose = require('mongoose'),
 Task = require('./api/models/todoListModel'),
 bodyParser = require('body-parser');
@@ -21,5 +22,6 @@ app.use(function(req, res) {
 });
 
 
-app.listen(port);
-console.log('todo list RESTful API server startd on: ' + port);
+app.listen(server_port, server_ip_address, function(){
+  console.log('todo list RESTful API server startd on: ' + port);
+});
